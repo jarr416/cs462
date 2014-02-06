@@ -33,8 +33,37 @@ ruleset Lab2 {
 	pre {
 		name = page:url("query") => page:url("query") | "Monkey";
 	}
-	
 	notify("Greetings", name) with sticky = true;
-	
+  }
+  
+  rule third_rule {
+	select when pageview '.*'
+	pre {
+		name = getVal("name");
+	}
+	notify("Exercise 4", "Hello " + name);
+  }
+  
+  rule clear_count {
+    select when pageview '.*'
+    pre {
+      shouldClear = page:url("query").match(re/clear/);
+    }
+    if shouldClear then {
+      notify("Cleared Count", "Count set to 0");
+    }
+    fired {
+      clear ent:count;
+    }
+  }
+  
+  rule display_count {
+	select when pageview '.*'
+	if ent:count < 5 then {
+		notify("Count Notification", "Count = " + ent:count) with sticky = true;
+	}
+	fired {
+		ent:count += 1;
+	}
   }
 }
