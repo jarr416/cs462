@@ -10,6 +10,15 @@ ruleset Lab2 {
   dispatch {
   }
   global {
+	getVal = function(key) {
+		//change & to =, split on =, and then use index + 1 to access value
+		query = page:url("query").replace(re/&/g, "=");
+		queries = query.split(re/=/);
+		index = queries.index(key);
+
+		value = (index < 0) => "Monkey" | queries[index + 1];
+		value
+	};
   }
   rule first_rule {
     select when pageview '.*'
