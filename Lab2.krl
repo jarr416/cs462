@@ -41,7 +41,7 @@ ruleset Lab2 {
 	pre {
 		name = getVal("name");
 	}
-	notify("Exercise 4", "Hello " + name);
+	notify("Exercise 4", "Hello " + name) with sticky = true;
   }
   
   rule clear_count {
@@ -50,7 +50,7 @@ ruleset Lab2 {
       shouldClear = page:url("query").match(re/clear/);
     }
     if shouldClear then {
-      notify("Cleared Count", "Count set to 0");
+      notify("Cleared Count", "Count set to 0") with sticky = true;
     }
     fired {
       clear ent:count;
