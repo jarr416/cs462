@@ -63,7 +63,7 @@ ruleset Lab2 {
 		notify("Count Notification", "Count = " + ent:count) with sticky = true;
 	}
 	fired {
-		ent:count += 1;
+		ent:count += 1 from 0;
 	}
   }
 }
