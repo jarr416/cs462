@@ -21,9 +21,12 @@ ruleset Lab2 {
   
   rule second_rule {
 	select when pageview '.*'
-	if page:url("query") then
-		notify("Greetings", "Hello " + page:url("query")) with sticky = true;
-	if not page:url("query") then
-		notify("Lab 2", "Hello Monkey") with sticky = true;
+	pre {
+		name = page:url("query");
+	}
+	if name then
+		notify("Greetings", "Hello " + name) with sticky = true;
+	if not name then
+		notify("Greetings", "Hello Monkey") with sticky = true;
   }
 }
