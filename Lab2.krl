@@ -31,10 +31,10 @@ ruleset Lab2 {
   rule second_rule {
 	select when pageview '.*'
 	pre {
-		name = page:url("query");
+		name = page:url("query") => page:url("query") | "Monkey";
 	}
 	
-	notify("Greetings", page:url("query")) with sticky = true;
+	notify("Greetings", name) with sticky = true;
 	
   }
 }
