@@ -24,10 +24,8 @@ ruleset Lab2 {
 	pre {
 		name = page:url("query");
 	}
-	if name then
-		notify("Greetings", "Hello " + name) with sticky = true;
-	if not name then
-		notify("Greetings", "Hello Monkey") with sticky = true;
-	notify("Hey", "I hate you");
+	
+	notify("Greetings", page:url("query")) with sticky = true;
+	
   }
 }
